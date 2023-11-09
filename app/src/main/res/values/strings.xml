@@ -1,0 +1,120 @@
+<resources>
+    <string name="app_name">Medicare Doctor</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="login_to_see_your_appointments">Login to see your appointments</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="reset_password">Reset password</string>
+    <string name="enter_your_email_address_we_will_send_nyou_email_to_reset_your_password">Enter your Email address we will send \nyou email to reset your password</string>
+    <string name="forget_password_">Forget Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_contentDescription">image</string>
+    <string name="let_s_get_started_text">Let\'s Get started</string>
+    <string name="intro_text_description">"Welcome to MediCare – Your Ultimate Healthcare Companion. Simplify your healthcare journey and be a hero by donating blood. ".</string>
+    <string name="login_in">LOGIN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up_description_text">Enter your name, email id and password, to register with us.</string>
+    <string name="name">Name</string>
+
+    <string name="sign_in_description_text">Enter your name, email id and password, to register with us.</string>
+
+    <string name="please_wait">Please Wait&#8230;</string>
+    <string name="next">Next</string>
+    <string name="age">Age</string>
+    <string name="Gender">Gender</string>
+    <string name="height">Height(Cm)</string>
+    <string name="weight">Weight(Kg)</string>
+    <string name="diabetic">Are You Diabetic?</string>
+    <string name="phone">Enter Mobile Number</string>
+    <string name="verify">Verify</string>
+    <string name="otp">Enter OTP</string>
+    <string name="sendotp">Send OTP</string>
+    <string name="register">REGISTER</string>
+    <string name="default_notification_channel_id">mdeicare_notification_channel_id</string>
+    <dimen name="item_board_content_marginBottom">10dp</dimen>
+    <dimen name="item_board_content_padding">10dp</dimen>
+    <dimen name="item_board_image_size">60dp</dimen>
+    <dimen name="item_board_image_circular_border_width">0.5dp</dimen>
+    <dimen name="item_board_name_layout_marginStart">10dp</dimen>
+    <dimen name="item_board_name_text_size">18sp</dimen>
+    <dimen name="item_board_created_by_text_size">14sp</dimen>
+    <dimen name="item_board_divider_marginTop">5dp</dimen>
+    <dimen name="item_board_divider_height">0.3dp</dimen>
+    <string-array name="gender_options">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Transgender</item>
+    </string-array>
+    <string-array name="diabetes_options">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+    <string-array name="blood_grp_options">
+        <item>A+</item>
+        <item>B+</item>
+        <item>AB+</item>
+        <item>O+</item>
+        <item>A-</item>
+        <item>B-</item>
+        <item>O-</item>
+        <item>AB-</item>
+
+
+    </string-array>
+
+
+    <string name="mobile">Mobile</string>
+    <string name="update">UPDATE</string>
+    <string name="my_profile">My Profile</string>
+
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_sign_out">Logout</string>
+    <string name="title_activity_doctor_description">Doctor_Description</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+</resources>

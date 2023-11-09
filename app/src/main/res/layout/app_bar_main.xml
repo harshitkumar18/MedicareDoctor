@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_main_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:popupTheme="@style/AppTheme.NoActionBar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="10dp"
+                    app:civ_border_color="@android:color/white"
+                    app:civ_border_width="2dp"
+
+                    android:src="@drawable/ic_user_place_holder"
+                    android:contentDescription="Profile Image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar_main_activity"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar_main_activity"
+                    tools:ignore="NotSibling" />
+
+                <TextView
+                    android:id="@+id/signedinuseret"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="48dp"
+                    android:text="UserName"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolbar_main_activity"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar_main_activity"
+                    app:layout_constraintEnd_toStartOf="@+id/profileImage"
+                    android:layout_marginTop="8dp"
+                    tools:ignore="NotSibling" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/main_content"/>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
