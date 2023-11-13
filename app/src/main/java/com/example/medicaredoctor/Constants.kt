@@ -61,7 +61,7 @@ object Constants {
     const val DEGREE: String = "degree"
     const val HOSPITAL_NAME: String =  "hospital"
     const val ADDRESS : String = "address"
-
+    const val AVAILABLE : String = "available"
 
 
     fun showImageChooser(activity: SettingActivity) {

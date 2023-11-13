@@ -217,75 +217,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //        showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().updateUserProfileData(this,userHashMap)
     }
-//    private fun newsuiset(){
-//        val recyclerView = findViewById<RecyclerView>(R.id.newsRecyclerView1)
-//
-//// Create a LinearLayoutManager with horizontal orientation
-//        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        recyclerView.layoutManager = layoutManager
-//
-//
-//        mAdapter = NewsListAdapter(this)
-//
-//// Set the adapter for the RecyclerView
-//        recyclerView.adapter = mAdapter
-//        showProgressDialog("Please Wait")
-//
-//// Fetch and populate data in your adapter (assuming fetchData() does this)
-////        fetchData()
-//
-//    }
-//    private fun fetchData() {
-//        hideProgressDialog()
-//        val queue = Volley.newRequestQueue(this)
-//        val url = "https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=6234c5797107411c9908d3fd4722d14d"
-//        val getRequest: JsonObjectRequest = object : JsonObjectRequest(
-//            Request.Method.GET,
-//            url,
-//            null,
-//            Response.Listener {
-//                Log.e("sdsadas", "$it")
-//                val newsJsonArray = it.getJSONArray("articles")
-//                val newsArray = ArrayList<News>()
-//                for (i in 0 until newsJsonArray.length()) {
-//                    val newsJsonObject = newsJsonArray.getJSONObject(i)
-//                    val news = News(
-//                        newsJsonObject.getString("author"),
-//                        newsJsonObject.getString("title"),
-//                        newsJsonObject.getString("url"),
-//                        newsJsonObject.getString("urlToImage")
-//                    )
-//
-//                    newsArray.add(news)
-//                }
-//                mAdapter.updateNews(newsArray)
-//                findViewById<RecyclerView>(R.id.newsRecyclerView1).visibility = View.VISIBLE
-//                findViewById<TextView>(R.id.no_news).visibility = View.GONE
-//                // Hide the progress dialog here, as data fetching is complete.
-//                hideProgressDialog()
-//            },
-//            Response.ErrorListener { error ->
-//
-//            }
-//        ) {
-//            @Throws(AuthFailureError::class)
-//            override fun getHeaders(): Map<String, String> {
-//                val params: MutableMap<String, String> = HashMap()
-//                params["User-Agent"] = "Mozilla/5.0"
-//                return params
-//            }
-//        }
-//        queue.add(getRequest)
-//    }
 
 
-
-
-//    override fun onitemClicked(item: News) {
-//        val intent = Intent(this@MainActivity,NewsAppDetail::class.java)
-//        intent.putExtra("news_item", item)
-//        startActivity(intent)
-//
-//    }
 
 }

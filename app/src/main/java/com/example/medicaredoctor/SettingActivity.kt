@@ -29,6 +29,7 @@ class SettingActivity : AppCompatActivity() {
     private var mSelectedImageFileUri: Uri? = null
 
     private var mProfileImageURL: String = ""
+    private var avaialble:Boolean? = null
 
     private lateinit var mDoctorDetails: Doctor
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -235,6 +236,17 @@ class SettingActivity : AppCompatActivity() {
 
         val et_degree = findViewById<TextView>(R.id.et_degree)
         et_degree.setText(user.degree.toString())
+        val toggleButton = findViewById<ToggleButton>(R.id.toggleButton)
+
+            if (user.available==true) {
+                toggleButton.isChecked = true
+
+            } else {
+
+                toggleButton.isChecked = false
+            }
+
+
 
         val et_interest = findViewById<EditText>(R.id.et_Interest)
 
@@ -257,15 +269,15 @@ class SettingActivity : AppCompatActivity() {
 
         val stringList = listOf("Male", "Female", "Transgender")
 
-//        val position = stringList.indexOf(user.gender)
-//
-//            // String found in the list, position will be the index of the string
-//            // Set the selected item in the Spinner based on the position
-//            gender_spinner.setSelection(position)
-//
-//
-//// Disable the spinner to prevent user interaction
-//        gender_spinner.isEnabled = false
+        val position = stringList.indexOf(user.gender)
+
+            // String found in the list, position will be the index of the string
+            // Set the selected item in the Spinner based on the position
+            gender_spinner.setSelection(position)
+
+
+// Disable the spinner to prevent user interaction
+        gender_spinner.isEnabled = false
 
 //        val blood_spinner = findViewById<Spinner>(R.id.spinner_blood)
 //
@@ -314,6 +326,7 @@ class SettingActivity : AppCompatActivity() {
         val et_hospital_name = findViewById<EditText>(R.id.et_Hospital)
         val et_address = findViewById<EditText>(R.id.et_Address)
         val et_speciality = findViewById<EditText>(R.id.et_specilaity)
+        val toggleButton = findViewById<ToggleButton>(R.id.toggleButton)
 
 
 //        val et_diabetic = findViewById<Spinner>(R.id.diabites)
@@ -347,6 +360,12 @@ class SettingActivity : AppCompatActivity() {
         if (et_speciality.text.toString() != mDoctorDetails.speciality.toString()) {
             userHashMap[Constants.SPECIALITY] = et_speciality.text.toString()
         }
+
+        avaialble = toggleButton.isChecked
+        if (avaialble!= mDoctorDetails.available) {
+            userHashMap[Constants.AVAILABLE] = avaialble!!
+        }
+
 
 
 

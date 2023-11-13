@@ -106,18 +106,16 @@
                                 android:textSize="@dimen/et_text_size" />
 
                         </com.google.android.material.textfield.TextInputLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            >
+
+
 
 
                             <!-- EditText for Age -->
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="0dp"
+
+                        <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
+
                                 android:layout_marginTop="@dimen/my_profile_et_mobile_marginTop">
 
                                 <androidx.appcompat.widget.AppCompatEditText
@@ -126,14 +124,24 @@
                                     android:layout_height="wrap_content"
                                     android:hint="Speciality"
                                     android:inputType="text"
+                                    android:layout_marginTop="20dp"
                                     android:textSize="@dimen/et_text_size" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <!-- Spinner for Gender -->
+                        <Spinner
+                            android:id="@+id/spinner_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginTop="20dp"
+
+                            android:entries="@array/gender_options"
+                           />
 
 
 
-                        </LinearLayout>
+
 
 
 
@@ -205,6 +213,34 @@
                                 android:inputType="text"
                                 android:textSize="@dimen/et_text_size" />
                         </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="20dp">
+
+                            <!-- TextView -->
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Availability"
+                                android:textSize="16sp"
+                                android:layout_gravity="center_vertical"/>
+
+                            <!-- ToggleButton -->
+                            <ToggleButton
+                                android:layout_weight="1"
+                                android:id="@+id/toggleButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:checked="true"
+                            android:textOff="Not Available"
+                            android:textOn="Available"/>
+
+                        </LinearLayout>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

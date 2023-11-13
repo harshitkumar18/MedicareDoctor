@@ -56,7 +56,7 @@ class DoctorsSignUpPage : BaseActivity() {
             val fullName = binding.name.text.toString()
             val email = binding.email.text.toString()
 
-
+            val gender: String = binding?.spinnerGender?.selectedItem.toString()
             if (fullName.isEmpty()) {
                 Toast.makeText(this, "Enter you name", Toast.LENGTH_SHORT).show()
             } else if (email.isEmpty()) {
@@ -74,7 +74,7 @@ class DoctorsSignUpPage : BaseActivity() {
             }
             else {
                 showProgressDialog("Please Wait")
-                addDatatoFirebase(fullName, email, mobileNumber,"${fullName}_${generateRandomString(5)}")
+                addDatatoFirebase(fullName, email, mobileNumber,gender,"${fullName}_${generateRandomString(5)}")
             }
         }
         binding.attachButton.setOnClickListener {
@@ -181,6 +181,7 @@ class DoctorsSignUpPage : BaseActivity() {
         fullName: String,
         email: String,
         mobile: String,
+        gender:String,
         doctorsId: String
     ) {
 
