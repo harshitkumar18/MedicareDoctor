@@ -2,6 +2,7 @@ package com.example.medicaredoctor
 
 
 
+import BookingListAdapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.bumptech.glide.Glide
+import com.example.medicaredoctor.Models.Appointment
 import com.example.medicaredoctor.Models.Doctor
 import com.example.medicaredoctor.databinding.ActivityMainBinding
 
@@ -60,6 +62,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //            }
         }
 //        newsuiset()
+        FirestoreClass().getusersList(this@MainActivity)
         FirestoreClass().loadUserData(this, true)
         showProgressDialog("Please Wait")
 
@@ -98,25 +101,28 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-//    private fun categoriesSet() {
-//        val rvBoardsList = findViewById<RecyclerView>(R.id.smallCardRecyclerView)
+    fun populatesbookingListToUI(booking_List: ArrayList<Appointment>) {
+        hideProgressDialog()
+        Log.e("populateBoardsListToUI", "Doctor List: $booking_List")
+        val rv_speciality_list = findViewById<RecyclerView>(R.id.bookingcardrecyclerView)
+        rv_speciality_list.layoutManager = LinearLayoutManager(this@MainActivity)
+
+//        rv_speciality_list.setHasFixedSize(true)
+
+        // Create an instance of DoctorListAdapter and pass the doctor_List to it.
+        val adapter = BookingListAdapter(this@MainActivity, booking_List)
+        rv_speciality_list.adapter = adapter // Attach the adapter to the recyclerView.
+
+//        adapter.setOnClickListener(object : DoctorListAdapter.OnClickListener {
+//            override fun onClick(position: Int, model: Doctor) {
+//                val intent = Intent(this@Details_of_Doctors,DoctorDescriptionActivity::class.java)
+//                val selectedModel = doctor_List[position] // Use a different variable name
 //
-//        val layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
-//        rvBoardsList.layoutManager = layoutManager
-//        rvBoardsList.setHasFixedSize(true)
-//
-//        val adapter = DemoAdapter(specialityList, this@MainActivity)
-//        rvBoardsList.adapter = adapter
-//
-//        adapter.setOnClickListener(object :
-//            DemoAdapter.OnClickListener {
-//            override fun onClick(position: Int) {
-//                val intent = Intent(this@MainActivity, Details_of_Doctors::class.java)
-//                intent.putExtra(Constants.SPECIALITY, specialityList[position])
+//                intent.putExtra(Constants.DOCTOR_MODEL, selectedModel)
 //                startActivity(intent)
 //            }
 //        })
-//    }
+    }
 
     private fun setupActionBar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_main_activity)

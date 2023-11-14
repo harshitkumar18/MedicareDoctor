@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorAccent"
+        android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
 
     <!-- Category TextView -->
     <TextView
-        android:id="@+id/textViewAppointment"
+        android:id="@+id/textViewCategories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Categories"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="12dp"
-         />
+        />
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -44,10 +44,10 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/smallCardRecyclerView"
+            android:id="@+id/bookingcardrecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="vertical" />
 
 
 

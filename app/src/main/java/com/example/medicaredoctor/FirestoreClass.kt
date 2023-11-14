@@ -4,6 +4,7 @@ package com.example.medicaredoctor
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
+import com.example.medicaredoctor.Models.Appointment
 import com.example.medicaredoctor.Models.Doctor
 
 
@@ -136,38 +137,24 @@ class FirestoreClass {
 //                Toast.makeText(activity, "Booking Confirmed", Toast.LENGTH_SHORT).show()
 //            }
 //    }
-//    fun getDoctorsList(activity: Details_of_Doctors, expertise: String) {
-//
-//    // The collection name for DOCTORS
-//    mfirestore.collection(Constants.DOCTOR)
-//        // Use "whereArrayContains" to query an array field. You should provide the field name and value.
-//        .whereEqualTo("speciality", expertise) // Assuming "specialities" is the field containing expertise values.
-//        .get()
-//        .addOnSuccessListener { document ->
-//            // Here we get the list of doctors in the form of documents.
-//            Log.e(activity.javaClass.simpleName, document.documents.toString())
-//            // Here we have created a new instance for Doctors ArrayList.
-//            val doctorList: ArrayList<Doctor> = ArrayList()
-//
-//            // A for loop to convert the documents into Doctors objects.
-//            for (doc in document.documents) {
-//                val doctor = doc.toObject(Doctor::class.java)
-//                if (doctor != null) {
-//                    doctor.documentId = doc.id
-//                }
-//                if (doctor != null) {
-//                    doctorList.add(doctor)
-//                }
-//            }
-//
-//            // Pass the result to the base activity.
-//            activity.populateDoctorsListToUI(doctorList)
-//        }
-//        .addOnFailureListener { e ->
-//            activity.hideProgressDialog()
-//            Log.e(activity.javaClass.simpleName, "Error while fetching doctors.", e)
-//        }
-//}
+    fun getusersList(activity: MainActivity) {
+
+    // The collection name for DOCTORS
+    mfirestore.collection(Constants.DOCTOR)
+        .document(getCurrentUserID())
+        .get()
+        .addOnSuccessListener { document ->
+            val loggedInUser = document.toObject(Doctor::class.java)
+            var bookedarraylist: ArrayList<Appointment>? = null
+            if (loggedInUser != null) {
+                bookedarraylist = loggedInUser.appointment
+            }
+            if (bookedarraylist != null) {
+                activity.populatesbookingListToUI(bookedarraylist)
+            }
+
+        }
+}
 //    fun getuserDetails(activity: DoctorDescriptionActivity, documentId: String) {
 //        mfirestore.collection(Constants.USERS)
 //            .document(documentId)

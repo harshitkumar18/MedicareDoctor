@@ -29,6 +29,10 @@ class DoctorsLoginPage : AppCompatActivity() {
         binding.gotoSignupPage.setOnClickListener{
             startActivity(Intent(this,DoctorsSignUpPage::class.java))
         }
+        binding.forgot.setOnClickListener {
+            startActivity(Intent(this,ForgetPassword::class.java))
+
+        }
         binding.signinuser.setOnClickListener {
             val Firebasestore = FirebaseFirestore.getInstance()
 

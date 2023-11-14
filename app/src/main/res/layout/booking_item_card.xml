@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/item_board_content_marginBottom"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/item_board_content_padding">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_bookeddoctor_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/image_contentDescription"
+            android:src="@drawable/ic_board_place_holder"
+            app:civ_border_color="@color/primary_text_color"
+            app:civ_border_width="@dimen/item_board_image_circular_border_width" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_board_name_layout_marginStart"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/booking_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/item_board_created_by_text_size"
+                tools:text="Created By" />
+
+            <TextView
+                android:id="@+id/item_tv_name_doctor_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text_color"
+                android:textSize="@dimen/item_board_name_text_size"
+                tools:text="Board Name" />
+
+            <TextView
+                android:id="@+id/booking_time_and_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/item_board_created_by_text_size"
+                tools:text="Created By" />
+            <TextView
+                android:id="@+id/booking_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="@dimen/item_board_created_by_text_size"
+                tools:text="Created By" />
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonReschedule"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:text="Reschedule"
+            android:textColor="@color/black"
+            android:background="@drawable/default_option_border_changed"
+
+            android:visibility="gone"
+            android:layout_marginStart="4dp"
+            android:drawablePadding="2dp" />
+
+
+        <Button
+            android:id="@+id/cancel_appointment"
+            android:layout_width="0dp"
+            android:backgroundTint="#ED6C6C"
+            android:layout_marginStart="2dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/default_option_border_changed"
+            android:text="Cancel"
+            android:textColor="@color/black"
+
+            android:visibility="gone"
+            android:drawablePadding="4dp"
+            android:layout_marginEnd="4dp" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_board_divider_height"
+        android:layout_marginTop="@dimen/item_board_divider_marginTop"
+        android:background="@color/divider_color" />
+
+</LinearLayout>
