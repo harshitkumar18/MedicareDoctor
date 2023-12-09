@@ -197,7 +197,7 @@ class DoctorsSignUpPage : BaseActivity() {
                     val toPhoneNumberUser = "+91$mobile"
                     val fromPhoneNumberUser =
                         "+14043345873" // Replace with your Twilio phone number
-                    val messageUser = "Hey Your id is $doctorsId"
+                    val messageUser = "Request for registration sent succesfully. Wait for verification. Your request id is $doctorsId . Admin will soon contact you."
 
                     GlobalScope.launch(Dispatchers.IO) {
                         try {
@@ -222,7 +222,7 @@ class DoctorsSignUpPage : BaseActivity() {
                 val toPhoneNumberUser2 = "+918318029261"
                 val fromPhoneNumberUser2 =
                     "+14043345873" // Replace with your Twilio phone number
-                val messageUser2 = "Hey Your id is $doctorsId"
+                val messageUser2 = "Request for doctor registration with id- $doctorsId \n emailid - $email and Phone number - $mobile"
 
                 GlobalScope.launch(Dispatchers.IO) {
                     try {

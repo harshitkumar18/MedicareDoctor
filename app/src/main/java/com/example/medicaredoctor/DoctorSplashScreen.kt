@@ -10,10 +10,20 @@ class DoctorSplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_splash_screen)
+        Handler(Looper.getMainLooper()).postDelayed({
 
-        Handler(Looper.getMainLooper()).postDelayed(
+            finish()
+        }, 9000)
+        Handler().postDelayed(
             {
-                startActivity(Intent(this, DoctorsSignUpPage::class.java))
+                var currentUserID = FirestoreClass().getCurrentUserID()
+                if(currentUserID.isNotEmpty()){
+                    startActivity(Intent(this, MainActivity::class.java))
+
+                }
+                else{
+                    startActivity(Intent(this, DoctorsLoginPage::class.java))
+                }
                 finish()
             }, 3000
         )

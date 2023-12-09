@@ -1,26 +1,25 @@
+package com.example.medicaredoctor
+
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.medicaredoctor.Constants
-import com.example.medicaredoctor.MainActivity
 import com.example.medicaredoctor.Models.Appointment
-import com.example.medicaredoctor.R
-import com.example.medicaredoctor.User
-
+import com.example.medicaredoctor.Models.Doctor
 import com.google.firebase.firestore.FirebaseFirestore
 
-class BookingListAdapter(
-    private val context: Context,
-    private var list: List<Appointment>
-) : RecyclerView.Adapter<BookingListAdapter.ViewHolder>() {
+class BookingHistoryListAdapter  (private val context: Context,
+private var list: ArrayList<Appointment>
+) : RecyclerView.Adapter<BookingHistoryListAdapter.ViewHolder>() {
 
 //    private var onClickListener: OnClickListener? = null
 
@@ -48,44 +47,33 @@ class BookingListAdapter(
             .document(model.user_id)
             .get()
             .addOnSuccessListener { documentSnapshot ->
-                val doctorDetails = documentSnapshot.toObject(User::class.java)
+                val userDetails = documentSnapshot.toObject(User::class.java)
 
-                if (doctorDetails != null) {
+                if (userDetails != null) {
                     // Populate the views with doctor details
                     Glide.with(context)
-                        .load(doctorDetails.image)
+                        .load(userDetails.image)
                         .centerCrop()
                         .placeholder(R.drawable.ic_board_place_holder)
                         .into(holder.ivuserrImage)
 
-                    holder.tvuserrName.text = doctorDetails.name
+                    holder.tvuserrName.text = userDetails.name
                     holder.tvbookingid.text = "Booking id: ${model.id}"
                     holder.tvBookingTimeDate.text = "Time: ${model.time}, Date: ${model.date}"
                     holder.bookingStatus.text = "Status: ${model.status}"
-                    holder.done.setOnClickListener {
+                    holder.done.visibility = View.GONE
+                    holder.expire_appointment.visibility = View.GONE
 
-                        if(context is MainActivity){
-                            context.addtobookinglist(position)
-                        }
-
-
-
-                    }
-                    holder.expire_appointment.setOnClickListener {
-                        if(context is MainActivity) {
-                            context.addtoexpirelist(position)
-                        }
-                    }
 
 
                 }
             }
     }
 
-        override fun getItemCount(): Int {
-            return list.size
-        }
+    override fun getItemCount(): Int {
+        return list.size
     }
+}
 
 //    fun setOnClickListener(onClickListener: OnClickListener) {
 //        this.onClickListener = onClickListener
@@ -100,4 +88,3 @@ class BookingListAdapter(
 //        anim.duration = 1000
 //        view.startAnimation(anim)
 //    }
-

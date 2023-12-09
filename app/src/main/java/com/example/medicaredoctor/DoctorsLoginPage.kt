@@ -28,9 +28,11 @@ class DoctorsLoginPage : AppCompatActivity() {
         setContentView(binding.root)
         binding.gotoSignupPage.setOnClickListener{
             startActivity(Intent(this,DoctorsSignUpPage::class.java))
+            finish()
         }
         binding.forgot.setOnClickListener {
             startActivity(Intent(this,ForgetPassword::class.java))
+            finish()
 
         }
         binding.signinuser.setOnClickListener {
@@ -57,6 +59,7 @@ class DoctorsLoginPage : AppCompatActivity() {
                  Toast.makeText(this,"Successfully login",Toast.LENGTH_SHORT).show()
                  val intent  = Intent(this,MainActivity::class.java)
                  startActivity(intent)
+                 finish()
              }
              else
              {

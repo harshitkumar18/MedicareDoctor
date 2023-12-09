@@ -112,21 +112,16 @@
 
                             <!-- EditText for Age -->
 
-                        <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
 
-                                android:layout_marginTop="@dimen/my_profile_et_mobile_marginTop">
+                        <Spinner
+                            android:id="@+id/et_speciality"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
 
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:id="@+id/et_specilaity"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Speciality"
-                                    android:inputType="text"
-                                    android:layout_marginTop="20dp"
-                                    android:textSize="@dimen/et_text_size" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_marginTop="20dp"
+
+                            android:entries="@array/specaility_options"
+                            />
 
                             <!-- Spinner for Gender -->
                         <Spinner

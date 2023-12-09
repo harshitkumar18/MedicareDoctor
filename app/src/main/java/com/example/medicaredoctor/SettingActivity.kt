@@ -87,7 +87,7 @@ class SettingActivity : AppCompatActivity() {
 
         // Navigate to MainActivity with the home menu item selected
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("selectedItemId", R.id.home) // Pass the ID of the home menu item
+        intent.putExtra("selectedItemId", R.id.bookings) // Pass the ID of the home menu item
         startActivity(intent)
         finish()
     }
@@ -260,10 +260,13 @@ class SettingActivity : AppCompatActivity() {
 
         val et_address = findViewById<EditText>(R.id.et_Address)
         et_address.setText(user.address.toString())
-        val et_speciality = findViewById<EditText>(R.id.et_specilaity)
-        et_speciality.setText(user.speciality.toString())
+        val et_speciality = findViewById<Spinner>(R.id.et_speciality)
+//        et_speciality.setText(user.speciality.toString())
 
+        val specialityList = listOf("Surgeon", "Dentist", "Neurologist", "Cardiologist", "Gynaecologist")
 
+        val position_speciality = specialityList.indexOf(user.speciality)
+        et_speciality.setSelection(position_speciality)
 
         val gender_spinner = findViewById<Spinner>(R.id.spinner_gender)
 
@@ -277,7 +280,7 @@ class SettingActivity : AppCompatActivity() {
 
 
 // Disable the spinner to prevent user interaction
-        gender_spinner.isEnabled = false
+
 
 //        val blood_spinner = findViewById<Spinner>(R.id.spinner_blood)
 //
@@ -325,8 +328,9 @@ class SettingActivity : AppCompatActivity() {
         val et_degree = findViewById<EditText>(R.id.et_degree)
         val et_hospital_name = findViewById<EditText>(R.id.et_Hospital)
         val et_address = findViewById<EditText>(R.id.et_Address)
-        val et_speciality = findViewById<EditText>(R.id.et_specilaity)
+        val et_speciality = findViewById<Spinner>(R.id.et_speciality)
         val toggleButton = findViewById<ToggleButton>(R.id.toggleButton)
+        val et_gender = findViewById<Spinner>(R.id.spinner_gender)
 
 
 //        val et_diabetic = findViewById<Spinner>(R.id.diabites)
@@ -357,8 +361,11 @@ class SettingActivity : AppCompatActivity() {
         if (et_degree.text.toString() != mDoctorDetails.degree.toString()) {
             userHashMap[Constants.DEGREE] = et_degree.text.toString()
         }
-        if (et_speciality.text.toString() != mDoctorDetails.speciality.toString()) {
-            userHashMap[Constants.SPECIALITY] = et_speciality.text.toString()
+        if (  et_speciality.selectedItem.toString() != mDoctorDetails.speciality.toString()) {
+            userHashMap[Constants.SPECIALITY] = et_speciality.selectedItem.toString()
+        }
+        if (  et_gender.selectedItem.toString() != mDoctorDetails.gender.toString()) {
+            userHashMap[Constants.GENDER] = et_gender.selectedItem.toString()
         }
 
         avaialble = toggleButton.isChecked

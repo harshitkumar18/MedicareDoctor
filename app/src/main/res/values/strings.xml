@@ -55,19 +55,21 @@
         <item>No</item>
         <item>Yes</item>
     </string-array>
-    <string-array name="blood_grp_options">
-        <item>A+</item>
-        <item>B+</item>
-        <item>AB+</item>
-        <item>O+</item>
-        <item>A-</item>
-        <item>B-</item>
-        <item>O-</item>
-        <item>AB-</item>
+    <string-array name="specaility_options">
+        <item>Surgeon</item>
+        <item>Dentist</item>
+        <item>Neurologist</item>
+        <item>Cardiologist</item>
+        <item>Gynaecologist</item>
+
 
 
     </string-array>
 
+    <string-array name="appointment_options">
+        <item>Successful</item>
+        <item>Expired</item>
+    </string-array>
 
     <string name="mobile">Mobile</string>
     <string name="update">UPDATE</string>

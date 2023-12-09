@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_home_24"
-        android:title="Home"  />
-    <item
         android:id="@+id/bookings"
-        android:icon="@drawable/baseline_calendar_month_24"
-        android:title="Bookings" />
+        android:icon="@drawable/baseline_book_24"
+        android:title="Appointment"  />
     <item
-        android:id="@+id/webview_chatbot"
-        android:icon="@drawable/ic_message_24"
-        android:title="Chatbot" />
+        android:id="@+id/slots"
+        android:icon="@drawable/baseline_calendar_month_24"
+        android:title="Slots" />
+
 <!--    <item-->
 <!--        android:id="@+id/settings"-->
 <!--        android:icon="@drawable/ic_user_place_holder"-->

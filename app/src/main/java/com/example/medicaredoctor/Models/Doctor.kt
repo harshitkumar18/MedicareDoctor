@@ -21,7 +21,11 @@ data class Doctor(
     val hospital: String = "",
     val address: String = "",
     val available: Boolean = true,
-    val appointment: ArrayList<Appointment> = ArrayList()
+    val appointment: ArrayList<Appointment> = ArrayList(),
+    val bookingappointment: ArrayList<Appointment> = ArrayList(),
+    val expiredappointment: ArrayList<Appointment> = ArrayList(),
+
+    val timeslots: ArrayList<String> = ArrayList()
 ) : Parcelable {
     @RequiresApi(Build.VERSION_CODES.Q)
     constructor(source: Parcel) : this(
@@ -39,7 +43,12 @@ data class Doctor(
         source.readString() ?: "",
         source.readString() ?: "",
         source.readBoolean() ?: true,
-        source.createTypedArrayList(Appointment.CREATOR) ?: ArrayList()
+        source.createTypedArrayList(Appointment.CREATOR) ?: ArrayList(),
+        source.createTypedArrayList(Appointment.CREATOR) ?: ArrayList(),
+        source.createTypedArrayList(Appointment.CREATOR) ?: ArrayList(),
+        ArrayList<String>().apply {
+            source.readList(this, String::class.java.classLoader)
+        }
 
     )
 
@@ -62,6 +71,9 @@ data class Doctor(
         writeString(address)
         writeBoolean(available)
         writeTypedList(appointment)
+        writeTypedList(bookingappointment)
+        writeTypedList(expiredappointment)
+        writeList(timeslots)
     }
 
     companion object {

@@ -4,8 +4,8 @@
 
         <item
             android:id="@+id/BMI_CALCULATOR"
-            android:icon="@drawable/baseline_calculate_24"
-            android:title="BMI Calculator"
+            android:icon="@drawable/baseline_calendar_month_24"
+            android:title="History"
             android:background="@drawable/shape_button_rounded"
             android:foreground="?attr/selectableItemBackground"
         />

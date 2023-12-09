@@ -2,16 +2,16 @@ package com.example.medicaredoctor
 
 
 import android.app.Activity
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.medicaredoctor.Models.Appointment
 import com.example.medicaredoctor.Models.Doctor
 
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-
 
 
 class FirestoreClass {
@@ -26,6 +26,20 @@ class FirestoreClass {
 //                   activity.userRegisteredSuccess()
 //             }
 //    }
+@RequiresApi(Build.VERSION_CODES.O)
+fun updatedoneappointmentlist(activity: MainActivity, doctorHashMap: HashMap<String, Any>, documentId: String) {
+    mfirestore.collection(Constants.DOCTOR) // Collection Name
+        .document(documentId) // Document ID
+        .update(doctorHashMap) // A hashmap of fields which are to be updated.
+        .addOnSuccessListener {
+            // Profile data is updated successfully.
+            Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
+
+            Toast.makeText(activity, "Item Removed From Active List", Toast.LENGTH_SHORT).show()
+            activity.successappointmentdone()
+
+        }
+}
     fun loadUserData(activity: Activity, readBoardsList: Boolean = false){
         mfirestore.collection(Constants.DOCTOR)
             .document(getCurrentUserID())
@@ -137,7 +151,8 @@ class FirestoreClass {
 //                Toast.makeText(activity, "Booking Confirmed", Toast.LENGTH_SHORT).show()
 //            }
 //    }
-    fun getusersList(activity: MainActivity) {
+@RequiresApi(Build.VERSION_CODES.O)
+fun getusersList(activity: MainActivity) {
 
     // The collection name for DOCTORS
     mfirestore.collection(Constants.DOCTOR)
@@ -155,6 +170,67 @@ class FirestoreClass {
 
         }
 }
+    fun getappointmenthistoryList(activity: History, selectedfilter:String) {
+
+        // The collection name for DOCTORS
+        val fieldPath = if (selectedfilter == "Successful") {
+            "bookingappointment"
+        } else {
+            "expiredappointment"
+        }
+
+        mfirestore.collection(Constants.DOCTOR)
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val loggedInUser = document.toObject(Doctor::class.java)
+                var bookedarraylist: ArrayList<Appointment>? = null
+                if (loggedInUser != null) {
+                    // Access the field based on the fieldPath
+                    bookedarraylist = when (fieldPath) {
+                        "bookingappointment" -> loggedInUser.bookingappointment
+                        "expiredappointment" -> loggedInUser.expiredappointment
+                        else -> null
+                    }
+                }
+                if (bookedarraylist != null) {
+                    activity.populatesbookingHistoryListToUI(bookedarraylist)
+                }
+            }
+    }
+    fun getslotList(activity: SlotsActivity) {
+
+        // The collection name for DOCTORS
+        mfirestore.collection(Constants.DOCTOR)
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val loggedInUser = document.toObject(Doctor::class.java)
+                var timeslotlist: MutableList<String>? = null
+                if (loggedInUser != null) {
+                    timeslotlist = loggedInUser.timeslots
+                }
+                if (timeslotlist != null) {
+                    activity.loadslotlist(timeslotlist)
+                }
+
+            }
+    }
+    fun updateTimeslot(activity: SlotsActivity, timeslots: MutableList<String>) {
+        // Update the 'timeslots' field for the current doctor
+        mfirestore.collection(Constants.DOCTOR)
+            .document(FirestoreClass().getCurrentUserID())
+            .update("timeslots", timeslots)
+            .addOnSuccessListener {
+                Log.e(activity.javaClass.simpleName, "Timeslots updated successfully.")
+                activity.disablebutton()
+            }
+            .addOnFailureListener { e ->
+                Log.e(activity.javaClass.simpleName, "Error updating timeslots.", e)
+
+            }
+    }
+
 //    fun getuserDetails(activity: DoctorDescriptionActivity, documentId: String) {
 //        mfirestore.collection(Constants.USERS)
 //            .document(documentId)

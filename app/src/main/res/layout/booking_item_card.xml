@@ -84,31 +84,31 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonReschedule"
+            android:id="@+id/donebutton"
             android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:text="Reschedule"
+            android:text="Done"
             android:textColor="@color/black"
             android:background="@drawable/default_option_border_changed"
 
-            android:visibility="gone"
+
             android:layout_marginStart="4dp"
             android:drawablePadding="2dp" />
 
 
         <Button
-            android:id="@+id/cancel_appointment"
+            android:id="@+id/expire_appointment"
             android:layout_width="0dp"
             android:backgroundTint="#ED6C6C"
             android:layout_marginStart="2dp"
             android:layout_height="38dp"
             android:layout_weight="1"
             android:background="@drawable/default_option_border_changed"
-            android:text="Cancel"
+            android:text="Expired"
             android:textColor="@color/black"
 
-            android:visibility="gone"
+
             android:drawablePadding="4dp"
             android:layout_marginEnd="4dp" />
 
