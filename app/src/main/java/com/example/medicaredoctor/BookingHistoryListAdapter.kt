@@ -2,19 +2,17 @@ package com.example.medicaredoctor
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.medicaredoctor.Models.Appointment
-import com.example.medicaredoctor.Models.Doctor
+import com.example.medicaredoctor.Models.User
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BookingHistoryListAdapter  (private val context: Context,

@@ -8,11 +8,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.medicaredoctor.Models.Appointment
 import com.example.medicaredoctor.Models.Doctor
+import com.example.medicaredoctor.Models.User
 import com.example.medicaredoctor.databinding.ActivityMainBinding
 
 
@@ -30,13 +33,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 import de.hdodenhof.circleimageview.CircleImageView
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
-import java.util.ArrayList
+
+import java.util.Date
 import java.util.Locale
+import kotlin.collections.ArrayList
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener
@@ -116,53 +116,32 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     @RequiresApi(Build.VERSION_CODES.O)
     fun populatesbookingListToUI(booking_List: ArrayList<Appointment>) {
         hideProgressDialog()
-        activebookinglist = booking_List
-        Log.e("populateBoardsListToUI", "Doctor List: $booking_List")
-//        val filteredList = ArrayList(booking_List.filter { appointment ->
-//            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.getDefault())
-//            val currentDateTime = LocalDateTime.now()
-//
-//            try {
-//                val appointmentDateTime = LocalDateTime.parse("${appointment.date} ${appointment.time}", formatter)
-//                val isSameDayOrLater = appointmentDateTime.isAfter(currentDateTime) || appointmentDateTime.isEqual(currentDateTime)
-//                val isSameDay = appointmentDateTime.toLocalDate() == currentDateTime.toLocalDate()
-//
-//                if (isSameDayOrLater && (isSameDay || appointmentDateTime.toLocalTime() < currentDateTime.toLocalTime())) {
-//                    return@filter true
-//                }
-//            } catch (e: DateTimeParseException) {
-//                e.printStackTrace()
-//            }
-//
-//            return@filter false
-//        })
-//        val sortedList = filteredList.sortedWith(compareBy<Appointment> {
-//            LocalDate.parse(it.date, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-//        }.thenBy {
-//            LocalTime.parse(it.time, DateTimeFormatter.ofPattern("hh:mm a"))
-//        })
 
+        // Update activebookinglist with the sorted list
+
+
+        // Sort the booking_List based on date and time
+        val sortedBookingList = booking_List.sortedWith(compareBy<Appointment> { parseDate(it.date) }.thenBy { parseTime(it.time) })
+        activebookinglist = ArrayList(sortedBookingList)
+        Log.e("populateBoardsListToUI", "Doctor List: $sortedBookingList")
 
         val rv_speciality_list = findViewById<RecyclerView>(R.id.bookingcardrecyclerView)
         rv_speciality_list.layoutManager = LinearLayoutManager(this@MainActivity)
 
-//        rv_speciality_list.setHasFixedSize(true)
-
-        // Create an instance of DoctorListAdapter and pass the doctor_List to it.
-        val adapter = BookingListAdapter(this@MainActivity, booking_List)
-        rv_speciality_list.adapter = adapter // Attach the adapter to the recyclerView.
-
-//        adapter.setOnClickListener(object : DoctorListAdapter.OnClickListener {
-//            override fun onClick(position: Int, model: Doctor) {
-//                val intent = Intent(this@Details_of_Doctors,DoctorDescriptionActivity::class.java)
-//                val selectedModel = doctor_List[position] // Use a different variable name
-//
-//                intent.putExtra(Constants.DOCTOR_MODEL, selectedModel)
-//                startActivity(intent)
-//            }
-//        })
+        // Create an instance of BookingListAdapter and pass the sorted list to it.
+        val adapter = BookingListAdapter(this@MainActivity, sortedBookingList)
+        rv_speciality_list.adapter = adapter
     }
 
+        private fun parseDate(dateString: String): Date {
+            val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            return format.parse(dateString) ?: Date()
+        }
+
+        private fun parseTime(timeString: String): Date {
+            val format = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            return format.parse(timeString) ?: Date()
+        }
     private fun setupActionBar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_main_activity)
         toolbar.setNavigationIcon(R.drawable.ic_action_navigation_menu)
@@ -268,7 +247,54 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             val bookingdonelist: ArrayList<Appointment> = ArrayList(mdoctordetail.bookingappointment)
             activebookinglist[position].status = "Appointment Succesfull"
             bookingdonelist.add(activebookinglist[position])
+            var userappointmentid: String = activebookinglist[position].user_id
+            Log.e("appointmentid", "${userappointmentid}")
 
+            FirebaseFirestore.getInstance().collection(Constants.USERS)
+                .document(userappointmentid)
+                .get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject(User::class.java)
+                    var bookedarraylist: ArrayList<AppointmentUser> = ArrayList()
+                    var appointmentdonelist: ArrayList<AppointmentUser>  = ArrayList()
+
+                    if (user != null) {
+                        bookedarraylist = user.userappointment
+                        appointmentdonelist = user.bookingappointment
+                    }
+
+                    if (bookedarraylist != null) {
+                        val indexToRemove = bookedarraylist.indexOfFirst { it.id == bookedarraylist[position].id }
+
+                        // Safety check for the index
+                        if (indexToRemove != -1) {
+                            // Add the removed item to appointmentdonelist
+                            bookedarraylist[indexToRemove].status = "Appointment Done"
+                            appointmentdonelist.add(bookedarraylist[indexToRemove])
+
+                            // Remove the item from bookedarraylist
+                            bookedarraylist.removeAt(indexToRemove)
+
+                            // Update Firestore only if the removal is successful
+                            val userHashMap = HashMap<String, Any>()
+                            userHashMap[Constants.USERAPPOINTMENT] = bookedarraylist
+                            userHashMap["bookingappointment"] = appointmentdonelist
+
+                            FirebaseFirestore.getInstance().collection(Constants.USERS)
+                                .document(userappointmentid)
+                                .update(userHashMap)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "USER Will be Notified Shortly", Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.e("FirestoreUpdateError", "Error updating Firestore: ${exception.message}", exception)
+                                }
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("FirestoreQueryError", "Error fetching user document: ${exception.message}", exception)
+                }
             val activelist: ArrayList<Appointment> = activebookinglist
             activelist.removeAt(position)
 
@@ -291,6 +317,54 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             val expiredlist: ArrayList<Appointment> = ArrayList(mdoctordetail.expiredappointment)
             activebookinglist[position].status = "Expired"
             expiredlist.add(activebookinglist[position])
+            var userappointmentid: String = activebookinglist[position].user_id
+            Log.e("appointmentid", "${userappointmentid}")
+
+            FirebaseFirestore.getInstance().collection(Constants.USERS)
+                .document(userappointmentid)
+                .get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject(User::class.java)
+                    var bookedarraylist: ArrayList<AppointmentUser> = ArrayList()
+                    var appointmentexpiredlist: ArrayList<AppointmentUser>  = ArrayList()
+
+                    if (user != null) {
+                        bookedarraylist = user.userappointment
+                        appointmentexpiredlist = user.expiredappointment
+                    }
+
+                    if (bookedarraylist != null) {
+                        val indexToRemove = bookedarraylist.indexOfFirst { it.id == bookedarraylist[position].id }
+
+                        // Safety check for the index
+                        if (indexToRemove != -1) {
+                            // Add the removed item to appointmentdonelist
+                            bookedarraylist[indexToRemove].status = "Appointment Expired"
+                            appointmentexpiredlist.add(bookedarraylist[indexToRemove])
+
+                            // Remove the item from bookedarraylist
+                            bookedarraylist.removeAt(indexToRemove)
+
+                            // Update Firestore only if the removal is successful
+                            val userHashMap = HashMap<String, Any>()
+                            userHashMap[Constants.USERAPPOINTMENT] = bookedarraylist
+                            userHashMap["expiredappointment"] = appointmentexpiredlist
+
+                            FirebaseFirestore.getInstance().collection(Constants.USERS)
+                                .document(userappointmentid)
+                                .update(userHashMap)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "USER Will be Notified Shortly", Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.e("FirestoreUpdateError", "Error updating Firestore: ${exception.message}", exception)
+                                }
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("FirestoreQueryError", "Error fetching user document: ${exception.message}", exception)
+                }
             val activelist: ArrayList<Appointment> = activebookinglist
             activelist.removeAt(position)
 

@@ -13,7 +13,7 @@ import com.example.medicaredoctor.Constants
 import com.example.medicaredoctor.MainActivity
 import com.example.medicaredoctor.Models.Appointment
 import com.example.medicaredoctor.R
-import com.example.medicaredoctor.User
+import com.example.medicaredoctor.Models.User
 
 import com.google.firebase.firestore.FirebaseFirestore
 

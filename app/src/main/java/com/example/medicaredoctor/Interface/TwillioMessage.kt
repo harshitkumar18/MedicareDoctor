@@ -18,8 +18,8 @@ interface TwilioApiService {
 }
 
 fun createTwilioApiService(): TwilioApiService {
-    val accountSid = "ACade57ae65880ce3b2511b46976c6e3f0"
-    val authToken = "79b0244ec27a65efe7e38c1498d6b28c"
+    val accountSid = ""
+    val authToken = ""
 
     val client = OkHttpClient.Builder()
         .addInterceptor { chain ->

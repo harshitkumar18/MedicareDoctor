@@ -72,7 +72,7 @@ class History : BaseActivity() {
         hideProgressDialog()
         Log.e("populateBoardsListToUI", "Doctor List: $booking_List")
 
-        val rv_speciality_list = findViewById<RecyclerView>(R.id.historyrecyclerView)
+        val rv_speciality_list = findViewById<RecyclerView>(R.id.recycler_view_history)
         rv_speciality_list.layoutManager = LinearLayoutManager(this@History)
 
 //        rv_speciality_list.setHasFixedSize(true)
